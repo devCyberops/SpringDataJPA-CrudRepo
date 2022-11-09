@@ -55,11 +55,10 @@
 		</dependency>
        </dependencies>
 	<distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
+        <repository>
+            <id>deploymentRepo</id>
             <url>http://172.16.99.128:8081/repository/deploymentRepo/</url>
-        </snapshotRepository>
-        
+        </repository>      
 		    </distributionManagement>
         <build>
 	 <plugins>
