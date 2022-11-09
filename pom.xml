@@ -54,12 +54,7 @@
 			<version>3.0.0</version>
 		</dependency>
        </dependencies>
-	<distributionManagement>
-        <repository>
-            <id>deploymentRepo</id>
-            <url>http://172.16.99.128:8081/repository/maven-releases/</url>
-        </repository>      
-		    </distributionManagement>
+	
         <build>
 	 <plugins>
 		<plugin>
