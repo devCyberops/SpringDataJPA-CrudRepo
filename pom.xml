@@ -63,11 +63,7 @@
             <id>nexus-releases</id>
             <url>http://192.168.100.85:8081/repository/maven-releases/ </url>
         </repository>
-		<repository>
-            <id>nexus-releases</id>
-            <url>http://192.168.100.85:8081/repository/arijedevops-release/ </url>
-        </repository>
-    </distributionManagement>
+		    </distributionManagement>
         <build>
 	 <plugins>
 		<plugin>
