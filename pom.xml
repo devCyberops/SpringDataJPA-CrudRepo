@@ -54,6 +54,16 @@
 			<version>3.0.0</version>
 		</dependency>
        </dependencies>
+	<distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://192.168.100.85:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://192.168.100.85:8081/repository/maven-releases/ </url>
+        </repository>
+    </distributionManagement>
         <build>
 	 <plugins>
 		<plugin>
@@ -73,6 +83,29 @@
                        <artifactId>maven-resources-plugin</artifactId>
                         <version>3.1.0</version>
 	        </plugin>
+		   <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serverId>nexus</serverId>
+                    <nexusUrl>http://192.168.60.20:8081/</nexusUrl>
+                    <skipStaging>true</skipStaging>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
 	</plugins>
        </build>
 
