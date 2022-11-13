@@ -26,6 +26,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency> 
+   <groupId>info.cukes</groupId> 
+   <artifactId>cucumber-junit</artifactId> 
+   <version>1.0.2</version> 
+   <scope>test</scope> 
+</dependency>
+		<dependency> 
+   <groupId>junit</groupId> 
+   <artifactId>junit</artifactId> 
+   <version>4.10</version> 
+   <scope>test</scope> 
+</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -54,7 +66,16 @@
 			<version>3.0.0</version>
 		</dependency>
        </dependencies>
-	
+	<distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://192.168.100.86:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://192.168.100.86:8081/repository/maven-releases/ </url>
+		        </repository>
+		    </distributionManagement>
         <build>
 	 <plugins>
 		<plugin>
