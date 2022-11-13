@@ -49,7 +49,7 @@ pipeline {
                //}
           //}
 
-	stage('Building our image') {
+	stage('Build image') {
                steps{
                         script {
                             dockerImage = docker.build registry + ":latest"
@@ -57,7 +57,7 @@ pipeline {
                }
         }
 
-         stage('Deploy our image') {
+         stage('Deploy image') {
                steps {
                         script {
                             docker.withRegistry( '', registryCredential ) {
