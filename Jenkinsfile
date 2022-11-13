@@ -50,11 +50,11 @@ environment {
 	    
     stage('Docker Build and Push') {
        steps {
-         withDockerRegistry([credentialsId: "Docker-Hub-AmirTrigui", url: ""]) {
+       // withDockerRegistry([credentialsId: "Docker-Hub-AmirTrigui", url: ""]) {
            sh 'printenv'
-           sh 'docker build -t likeaboos/ci:latest .'
-           sh 'docker push likeaboos/ci:latest '
-         }
+        //   sh 'docker build -t likeaboos/ci:latest .'
+//sh 'docker push likeaboos/ci:latest '
+   //      }
        }
      }
 
