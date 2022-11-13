@@ -36,7 +36,7 @@ pipeline {
                   sh  'mvn package'
               }
         }
-              stage("nexus deploy"){
+              stage("NEXUS DEPLOY"){
                steps{
                        sh 'mvn  deploy'
                }
