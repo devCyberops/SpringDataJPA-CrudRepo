@@ -67,6 +67,12 @@ pipeline {
                }
          }
 
+	stage('Junit / Mockito') {
+      		steps {
+        		sh 'mvn test'
+      				}
+    			}
+
    
 
          /* stage('DOCKER COMPOSE') {
