@@ -43,7 +43,7 @@ pipeline {
                           sh  'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Bouby2022'
                 }
           }
-              //stage("NEXUS DEPLOY"){
+              //stage("Nexus push"){
                //steps{
                  //      sh 'mvn  deploy'
                //}
@@ -67,21 +67,14 @@ pipeline {
                }
          }
 
- /*stage('Build image') {
-       dockerImage = docker.build("cartoure/devops-project:latest")
-    }
-    
- stage('Push image') {
-        withDockerRegistry([ credentialsId: "devops-dockerhub", url: "" ]) {
-        dockerImage.push()
-        }
-    }*/    
+   
 
-          stage('DOCKER COMPOSE') {
+         /* stage('DOCKER COMPOSE') {
                 steps {
                             sh 'docker-compose up -d --build'
                 }
-          } 
+          }*/
+	 
 
           
 
