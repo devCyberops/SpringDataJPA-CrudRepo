@@ -81,11 +81,13 @@ stage('Build Docker Image') {
 	    
 	         stage('DOCKER PUSH') {
                          steps {
-                           //    withDockerRegistry([credentialsId: "docker-hub-insaf", url: ""]) {
-                            //   sh 'printenv'
-           // sh 'docker build -t likeaboos/ci:latest .'
-                               sh 'docker push insaf921999/spring-app:latest'
-   //      }
+				 
+				
+                             withDockerRegistry([credentialsId: "docker-hub-insaf", url: ""]) {
+                             sh 'printenv'
+                             sh 'docker build -t insaf921999/spring-app:latest .'
+                               sh 'docker push insaf921999/spring-app:latest '
+      }
        }
      }
 	    
