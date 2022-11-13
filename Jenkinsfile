@@ -79,7 +79,7 @@ stage('Build Docker Image') {
 			  
 		  }
 	    
-	         stage('DOCKER PUSH') {
+	         stage('DOCKER PuUSH') {
                          steps {
 				 
 				
