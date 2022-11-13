@@ -79,6 +79,29 @@ stage('Build Docker Image') {
 			  
 		  }
 	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    		stage('Building Imagegh'){
+				steps{
+					script{
+						dockerImage = docker.build registry + ":$BUILD_NUMBER"
+					}
+				}				
+			}
+
+			stage('Deploy Imagegh'){
+				steps{
+					script{
+						docker.withRegistry( '', registryCredential ) 
+                        {dockerImage.push()}
+					}
+				}
+			}
 	         /*stage('DOCKER PuUSH') {
                          steps {
 				 
