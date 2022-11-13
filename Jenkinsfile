@@ -77,7 +77,7 @@ stage('Build Docker Image') {
                                         steps {
                                    sh 'docker push insaf921999/spring-app:latest'
                                             }
-		  }*/
+		  }
 
 
 		   stage('Run Spring && MySQL Containers') {
@@ -86,7 +86,7 @@ stage('Build Docker Image') {
                                       sh 'docker-compose up -d'
                                     }
                                 }
-                            }
+                            }*/
 
 	    
 
