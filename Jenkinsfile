@@ -1,25 +1,19 @@
 pipeline{
     agent any
-	/*	environment { 
-        registry = "insaf921999/spring-app" 
-        registryCredential = 'dockerHub'
-        dockerImage = '' 
-    }*/
- /*   tools {
+    tools {
         maven 'M2_HOME'
-    }*/
+    }
 
 
     stages {
 
-        
 
 
         stage('Getting project from Git') {
             steps{
       			checkout([$class: 'GitSCM', branches: [[name: '*/insaf']],
 			extensions: [],
-			userRemoteConfigs: [[url: 'https://github.com/devCyberops/SpringDataJPA-CrudRepo.git']]])
+			userRemoteConfigs: [[url: 'ttps://github.com/devCyberops/SpringDataJPA-CrudRepo.git']]])
             }
         }
 
@@ -67,27 +61,7 @@ pipeline{
 
             }
         }
-	    
-	        stage("Test JUnit - Mockito"){
-                steps {
-                            sh 'mvn test'
-                }
-          }
 
-	    
-    stage('Docker Build and Push') {
-       steps {
-        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-           sh 'printenv'
-           sh 'docker build -t insaf921999/Djerb@tunis1:latest .'
-sh 'docker push insaf921999/Djerb@tunis1:latest '
-         }
-       }
-     }
-
-
-	    
-/*
 stage('Build Docker Image') {
                       steps {
                           script {
@@ -96,64 +70,26 @@ stage('Build Docker Image') {
                       }
                   }
 
-	    
                   stage('login dockerhub') {
                                         steps {
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
-                                            }  
-		  }*/
+                                            }
+		  }
 	    
-	    
-	      /* stage('publish to docker') {
-                                        steps {
-                                   withDockerRegistry([credentialsId:"docker-hub", url: ""]) 
-						{
-							sh 'docker push isnaf921999/achat:""$BUILD_ID""'
-						}
-					   
-                                            }  
-		  }*/
-	    
-	    
-	    
-	    
-	   /*      stage("Docker Compose"){
-           steps{
-               sh "docker-compose up -d"
-           }
-       } 
-	    */
-	    
-	    
-	    	
-	         /*stage('DOCKER PuUSH') {
-                         steps {
-				 
-				
-                             withDockerRegistry([credentialsId: "docker-hub-insaf", url: ""]) {
-                             sh 'printenv'
-                             sh 'docker build -t insaf921999/spring-app:latest .'
-                             sh 'docker push insaf921999/spring-app:latest '
-      }
-       }
-     }*/
-	    
-	    
-	             /*         stage('Push Docker Image') {
+	                      stage('Push Docker Image') {
                                         steps {
                                    sh 'docker push insaf921999/spring-app:latest'
                                             }
 		  }
 
 
-	    
 		   stage('Run Spring && MySQL Containers') {
                                 steps {
                                     script {
                                       sh 'docker-compose up -d'
                                     }
                                 }
-                            }*/
+                            }
 
 	    
 
