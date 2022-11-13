@@ -70,26 +70,41 @@ stage('Build Docker Image') {
                       }
                   }
 
+	    
                   stage('login dockerhub') {
                                         steps {
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
                                             }
+			  
+			  
 		  }
 	    
-	                      stage('Push Docker Image') {
+	    stage('Docker Build and Push push Amir ') {
+       steps {
+       withDockerRegistry([credentialsId: "docker-hub-insaf", url: ""]) {
+           sh 'printenv'
+          // sh 'docker build -t likeaboos/ci:latest .'
+sh 'docker push insaf921999/spring-app:latest '
+         }
+       }
+     }
+	    
+	    
+	             /*         stage('Push Docker Image') {
                                         steps {
                                    sh 'docker push insaf921999/spring-app:latest'
                                             }
 		  }
 
 
+	    
 		   stage('Run Spring && MySQL Containers') {
                                 steps {
                                     script {
                                       sh 'docker-compose up -d'
                                     }
                                 }
-                            }
+                            }*/
 
 	    
 
