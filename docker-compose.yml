@@ -1,55 +1,27 @@
-version: '3.7'
+version: "2.2"
 services:
-
-  
-  ci-app-front:
-    build:
-      context: .
-    container_name: ci-angular
-    image: likeaboos/angular-ci:frontend
+  mysqldb:
+    image: mysql/mysql-server:8.0
+    restart: unless-stopped
     ports:
-      - "8888:80"
-    networks:
-      - ci-network
-      
-  ci-db:
-    container_name: ci-db
-    image: mysql:8.0
-    networks:
-      - ci-network
+      - 3306:3306
     environment:
-      - MYSQL_USER=new_user
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=achatdb
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=0000
+      - MYSQL_DATABASE= achatdb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
     volumes:
-      - dbvol:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    restart: always
+      - achatdb:/var/lib/mysql
 
-  ci-app:
-    build:
-      context: .
-    container_name: ci-spring
-    image: likeaboos/ci:latest
-    ports:
-      - "8089:8089"
-    networks:
-      - ci-network
-    depends_on:
-      - ci-db
+  achat:
+    build: ./
+    restart: on-failure
     environment:
-      - MYSQL_HOST=ci-db
-      - MYSQL_USERNAME=new_user
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=achatdb
-      - MYSQL_PORT=3306
-      
-
-networks:
-  ci-network:
-    name: ci-network
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/achatdb?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    ports:
+      - 8089:8089
+    depends_on:
+      - mysqldb
 
 volumes:
-  dbvol:
+  achatdb:
