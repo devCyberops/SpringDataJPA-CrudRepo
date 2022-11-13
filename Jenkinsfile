@@ -88,7 +88,11 @@ stage('Build Docker Image') {
 	    
 	    
 	    
-	    
+	         stage("Docker Compose"){
+           steps{
+               sh "docker-compose up -d"
+           }
+       } 
 	    
 	    
 	    
