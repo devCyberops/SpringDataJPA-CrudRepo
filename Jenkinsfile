@@ -50,20 +50,17 @@ pipeline{
 
             }
         }
-	    
-	 
 
 
-
-     /*   stage('Publish to Nexus') {
+        stage('Publish to Nexus') {
             steps {
+
+
   sh 'mvn clean package deploy:deploy-file -DgroupId=com.esprit.rh -DartifactId=achat -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.1.3:8081/repository/maven-releases/ -Dfile=target/achat-1.0.jar'
+
 
             }
         }
-	
-	
-	
 
 stage('Build Docker Image') {
                       steps {
@@ -71,17 +68,15 @@ stage('Build Docker Image') {
                             sh 'docker build -t insaf921999/spring-app:latest .'
                           }
                       }
-                  }*/
+                  }
 
-	
-	    
                   stage('login dockerhub') {
                                         steps {
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
                                             }
 		  }
 	    
-	                 /*     stage('Push Docker Image') {
+	                      stage('Push Docker Image') {
                                         steps {
                                    sh 'docker push insaf921999/spring-app:latest'
                                             }
@@ -97,23 +92,9 @@ stage('Build Docker Image') {
                             }
 
 	    
-       stage('Nexus Repository Manager') {
-            steps {
-                script {
-					nexusArtifactUploader artifacts: [[artifactId: 'achat', classifier: '', file: 'target/achat-1.0.jar', type: 'jar']], credentialsId: 'NEXUS_CRED', groupId: 'tn.esprit.rh', nexusUrl: '192.168.1.3:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0.0-SNAPSHOT'
-				}
-            }}*/
-	     stage("Email"){
-           steps{
-               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
-           }
-       } 
 
-             stage("NEXUS DEPLOY"){
-               steps{
-                       sh 'mvn  deploy'
-               }
-          }
+
+
      
 }
 
