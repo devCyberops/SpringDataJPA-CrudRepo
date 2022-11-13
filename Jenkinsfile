@@ -50,6 +50,13 @@ pipeline{
 
             }
         }
+	    
+	        stage("NEXUS DEPLOY"){
+               steps{
+                       sh 'mvn  deploy'
+               }
+          }
+
 
 
      /*   stage('Publish to Nexus') {
