@@ -2,8 +2,8 @@ pipeline {
     agent any
 
 	/*environment {
-            registry = "cartoure/devops-project"
-            registryCredential = 'cartoure-dockerhub'
+            registry = "cartoure/devops-projects"
+            registryCredential = 'devops-dockerhub'
             dockerImage = ''
      }*/
 
@@ -49,7 +49,7 @@ pipeline {
                //}
           //}
 
-	/*stage('Building our image') {
+	stage('Building our image') {
                steps{
                         script {
                             dockerImage = docker.build registry + ":latest"
@@ -65,9 +65,9 @@ pipeline {
                             }
                         }
                }
-         }*/
+         }
 
- stage('Build image') {
+ /*stage('Build image') {
        dockerImage = docker.build("cartoure/devops-project:latest")
     }
     
@@ -75,7 +75,7 @@ pipeline {
         withDockerRegistry([ credentialsId: "devops-dockerhub", url: "" ]) {
         dockerImage.push()
         }
-    }    
+    }*/    
 
           stage('DOCKER COMPOSE') {
                 steps {
