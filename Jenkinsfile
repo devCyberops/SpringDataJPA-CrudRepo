@@ -57,7 +57,7 @@ pipeline{
   sh 'mvn clean package deploy:deploy-file -DgroupId=com.esprit.rh -DartifactId=achat -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.1.3:8081/repository/maven-releases/ -Dfile=target/achat-1.0.jar'
 
             }
-        }*/
+        }
 
 stage('Build Docker Image') {
                       steps {
@@ -65,7 +65,7 @@ stage('Build Docker Image') {
                             sh 'docker build -t insaf921999/spring-app:latest .'
                           }
                       }
-                  }
+                  }*/
 
                   stage('login dockerhub') {
                                         steps {
