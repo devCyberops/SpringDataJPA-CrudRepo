@@ -65,7 +65,7 @@ pipeline{
 stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'docker build -t insaf921999/spring-app:latest .'
+                            sh 'docker build -t insaf921999/achat:latest .'
                           }
                       }
                   }
@@ -78,7 +78,7 @@ stage('Build Docker Image') {
 	    
 	                      stage('Push Docker Image') {
                                         steps {
-                                   sh 'docker push insaf921999/spring-app:latest'
+                                   sh 'docker push insaf921999/achat:latest'
                                             }
 		  }
 
