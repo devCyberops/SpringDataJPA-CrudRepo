@@ -1,4 +1,7 @@
-FROM openjdk:8
-ADD target/achat-1.0.jar achat-1.0.jar
-EXPOSE 8080
+FROM maven as build
+COPY . .
+RUN mvn clean install
+
+FROM openjdk:11.0
+EXPOSE 9090
 ENTRYPOINT ["java", "-jar", "achat-1.0.jar"]
