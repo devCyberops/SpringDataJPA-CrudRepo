@@ -67,7 +67,27 @@ pipeline{
 
             }
         }
+	    
+	        stage("Test JUnit - Mockito"){
+                steps {
+                            sh 'mvn test'
+                }
+          }
 
+	    
+    stage('Docker Build and Push') {
+       steps {
+        withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+           sh 'printenv'
+           sh 'docker build -t insaf921999/Djerb@tunis1:latest .'
+sh 'docker push insaf921999/Djerb@tunis1:latest '
+         }
+       }
+     }
+
+
+	    
+/*
 stage('Build Docker Image') {
                       steps {
                           script {
@@ -81,10 +101,10 @@ stage('Build Docker Image') {
                                         steps {
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
                                             }  
-		  }
+		  }*/
 	    
 	    
-	       stage('publish to docker') {
+	      /* stage('publish to docker') {
                                         steps {
                                    withDockerRegistry([credentialsId:"docker-hub", url: ""]) 
 						{
@@ -92,7 +112,7 @@ stage('Build Docker Image') {
 						}
 					   
                                             }  
-		  }
+		  }*/
 	    
 	    
 	    
