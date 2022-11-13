@@ -91,7 +91,7 @@ stage('Build Docker Image') {
                                       sh 'docker-compose up -d'
                                     }
                                 }
-                            }*/
+                            }
 
 	    
        stage('Nexus Repository Manager') {
@@ -99,7 +99,12 @@ stage('Build Docker Image') {
                 script {
 					nexusArtifactUploader artifacts: [[artifactId: 'achat', classifier: '', file: 'target/achat-1.0.jar', type: 'jar']], credentialsId: 'NEXUS_CRED', groupId: 'tn.esprit.rh', nexusUrl: '192.168.1.3:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0.0-SNAPSHOT'
 				}
-            }}
+            }}*/
+	     stage("Email"){
+           steps{
+               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
+           }
+       } 
 
 
      
