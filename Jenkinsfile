@@ -80,20 +80,29 @@ stage('Build Docker Image') {
                   stage('login dockerhub') {
                                         steps {
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
-                                            }
-			  
-			  
+                                            }  
+		  }
+	    
+	    
+	       stage('publish to docker') {
+                                        steps {
+                                   withDockerRegistry([credentialsId:"docker-hub", url: ""]) 
+						{
+							sh 'docker push isnaf921999/achat:""$BUILD_ID""'
+						}
+					   
+                                            }  
 		  }
 	    
 	    
 	    
 	    
-	         stage("Docker Compose"){
+	   /*      stage("Docker Compose"){
            steps{
                sh "docker-compose up -d"
            }
        } 
-	    
+	    */
 	    
 	    
 	    	
