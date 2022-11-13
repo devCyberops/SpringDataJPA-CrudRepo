@@ -43,11 +43,11 @@ pipeline {
                           sh  'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Bouby2022'
                 }
           }
-              //stage("Nexus push"){
-               //steps{
-                 //      sh 'mvn  deploy'
-               //}
-          //}
+              stage("Nexus push"){
+               steps{
+                       sh 'mvn  deploy'
+               }
+          }
 
 	stage('Build image') {
                steps{
