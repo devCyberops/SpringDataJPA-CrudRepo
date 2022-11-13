@@ -19,28 +19,35 @@ pipeline {
 
       
 
-        stage('MVN CLEAN'){
+        stage('MVN Clean'){
             steps{
                 sh  'mvn clean'
             }
         }
 
-        stage('MVN COMPILE'){
+        stage('MVN Compile'){
             steps{
                 sh  'mvn compile'
             }
         }
 
-        stage('MVN PACKAGE'){
+        stage('MVN Package'){
               steps{
                   sh  'mvn package'
               }
         }
-              stage("NEXUS DEPLOY"){
-               steps{
-                       sh 'mvn  deploy'
-               }
+	 
+	stage('MVN SonarQube'){
+
+                steps{
+                          sh  'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Bouby2022'
+                }
           }
+              //stage("NEXUS DEPLOY"){
+               //steps{
+                 //      sh 'mvn  deploy'
+               //}
+          //}
 
 	stage('Building our image') {
                steps{
@@ -66,12 +73,7 @@ pipeline {
                 }
           }
 
-          stage('MVN SONARQUBE'){
-
-                steps{
-                          sh  'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Bouby2022'
-                }
-          }
+          
 
       }
 }
