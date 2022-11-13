@@ -86,7 +86,7 @@ stage('Build Docker Image') {
                              withDockerRegistry([credentialsId: "docker-hub-insaf", url: ""]) {
                              sh 'printenv'
                              sh 'docker build -t insaf921999/spring-app:latest .'
-                               sh 'docker push insaf921999/spring-app:latest '
+                            //   sh 'docker push insaf921999/spring-app:latest '
       }
        }
      }
