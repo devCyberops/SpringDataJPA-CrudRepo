@@ -7,7 +7,12 @@ pipeline{
 
     stages {
 
-
+        
+	environment { 
+        registry = "insaf921999/spring-app" 
+        registryCredential = 'dockerHub'
+        dockerImage = '' 
+    }
 
         stage('Getting project from Git') {
             steps{
