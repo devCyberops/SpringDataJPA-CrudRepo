@@ -51,11 +51,7 @@ pipeline{
             }
         }
 	    
-	        stage("NEXUS DEPLOY"){
-               steps{
-                       sh 'mvn  deploy'
-               }
-          }
+	 
 
 
 
@@ -113,7 +109,11 @@ stage('Build Docker Image') {
            }
        } 
 
-
+             stage("NEXUS DEPLOY"){
+               steps{
+                       sh 'mvn  deploy'
+               }
+          }
      
 }
 
