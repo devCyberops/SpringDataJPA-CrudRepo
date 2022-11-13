@@ -13,7 +13,7 @@ pipeline{
             steps{
       			checkout([$class: 'GitSCM', branches: [[name: '*/insaf']],
 			extensions: [],
-			userRemoteConfigs: [[url: 'ttps://github.com/devCyberops/SpringDataJPA-CrudRepo.git']]])
+			userRemoteConfigs: [[url: 'https://github.com/devCyberops/SpringDataJPA-CrudRepo.git']]])
             }
         }
 
