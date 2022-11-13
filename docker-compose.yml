@@ -1,27 +1,43 @@
-version: "2.2"
+version: '3'
 services:
-  mysqldb:
-    image: mysql/mysql-server:8.0
-    restart: unless-stopped
+# Database Service (Mysql)
+  database:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=achatdb
     ports:
       - 3306:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=0000
-      - MYSQL_DATABASE= achatdb
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
     volumes:
-      - achatdb:/var/lib/mysql
-
-  achat:
-    build: ./
-    restart: on-failure
-    environment:
-      - spring.datasource.url=jdbc:mysql://mysqldb:3306/achatdb?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - /home/mysql/data
+    networks:
+      - backend
+ # App backend service
+  spring-boot:
+    depends_on:
+      - database
+    container_name: springcontainer
+    image: arijebhs/alpine
     ports:
       - 8089:8089
-    depends_on:
-      - mysqldb
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://database:3306/achatdb?useSSL=false",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "root",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+        }'
+    volumes:
+      - /home/m2
+    stdin_open: true
+    tty: true
+    networks:
+      - backend
+    restart: on-failure
+  
+networks:
+  backend:
 
-volumes:
-  achatdb:
