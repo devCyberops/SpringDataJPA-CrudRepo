@@ -73,11 +73,11 @@ stage('Build Docker Image') {
                                             }
 		  }
 	    
-	                      stage('Push Docker Image') {
+	                 /*     stage('Push Docker Image') {
                                         steps {
                                    sh 'docker push insaf921999/spring-app:latest'
                                             }
-		  }
+		  }*/
 
 
 		   stage('Run Spring && MySQL Containers') {
