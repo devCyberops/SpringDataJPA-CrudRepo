@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-	/*environment {
+	environment {
             registry = "cartoure/devops-projects"
             registryCredential = 'devops-dockerhub'
             dockerImage = ''
-     }*/
+     }
 
  stages {
 
