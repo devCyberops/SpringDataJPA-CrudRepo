@@ -46,11 +46,7 @@ pipeline{
             }
         }
 
-     stage("Email"){
-           steps{
-               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
-           }
-       } 
+ 
 	    
 	    
         stage('Publish to Nexus') {
@@ -78,6 +74,12 @@ stage('Build Docker Image') {
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
                                             }
 		  }
+	    
+	        stage("Email"){     
+         steps{
+               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
+          }
+       } 
 	    
 	             /*         stage('Push Docker Image') {
                                         steps {
