@@ -48,8 +48,8 @@ networks:
    front:
     build:
       context: .
-    container_name: ci-angular
-    image: likeaboos/angular-ci:frontend
+    container_name: angular
+    image: milqshake/angular:frontend
     ports:
       - "8888:80"
     networks:
