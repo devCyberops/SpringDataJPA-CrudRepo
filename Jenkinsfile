@@ -73,7 +73,7 @@ stage('Build Docker Image') {
 	    
 	                      stage('Push Docker Image') {
                                         steps {
-                                   sh 'docker push insaf921999/achat:latest'
+                                   sh 'docker push insaf921999/achat:latest '
                                             }
 		  }
 
