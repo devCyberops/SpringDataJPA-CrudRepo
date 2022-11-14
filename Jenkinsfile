@@ -28,7 +28,7 @@ environment {
         }
         stage ('MVN SonarQube') {
 		steps {
-			
+			 sh 'printenv'
               //  sh  "mvn sonar:sonar -Dsonar.login=ee074ba54a7030fc4acf6117d9b3a5490e12febd"
 	
 		}
@@ -36,6 +36,7 @@ environment {
             
 	    stage("nexus deploy"){
                steps{
+		        sh 'printenv'
                     //   sh 'mvn clean deploy -DskipTests'
                     //   sh'mvn clean deploy -Dmaven.test.skip=true -Dresume=false'
                }
