@@ -109,7 +109,7 @@ post {
                      body: "Succes on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER} "        
         }
 
-
+}
      
 }
 
