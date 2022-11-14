@@ -11,7 +11,11 @@ pipeline{
 			userRemoteConfigs: [[url: 'https://github.com/devCyberops/SpringDataJPA-CrudRepo.git']]])
             }
         }
-
+       stage("Email"){     
+         steps{
+               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
+          }
+       } 
 
 
         stage('Cleaning the project') {
@@ -75,11 +79,7 @@ stage('Build Docker Image') {
                                             }
 		  }
 	    
-	        stage("Email"){     
-         steps{
-               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
-          }
-       } 
+	 
 	    
 	             /*         stage('Push Docker Image') {
                                         steps {
