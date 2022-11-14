@@ -76,7 +76,7 @@ public class ProduitServiceImplTest {
 	     Mockito.verify(produitRepositoryMock).deleteById(op2.getIdProduit());
 			System.out.println("woooorkiiiiing delete !");
 
-	}
+	}  
 
 	@Test
 	public void testupdateProduit() {
@@ -89,3 +89,4 @@ public class ProduitServiceImplTest {
 	}
 
 }
+*/
