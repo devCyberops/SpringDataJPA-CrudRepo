@@ -29,15 +29,15 @@ environment {
         stage ('MVN SonarQube') {
 		steps {
 			
-                sh  "mvn sonar:sonar -Dsonar.login=ee074ba54a7030fc4acf6117d9b3a5490e12febd"
+              //  sh  "mvn sonar:sonar -Dsonar.login=ee074ba54a7030fc4acf6117d9b3a5490e12febd"
 	
 		}
 	}
             
 	    stage("nexus deploy"){
                steps{
-                       sh 'mvn clean deploy -DskipTests'
-                       sh'mvn clean deploy -Dmaven.test.skip=true -Dresume=false'
+                    //   sh 'mvn clean deploy -DskipTests'
+                    //   sh'mvn clean deploy -Dmaven.test.skip=true -Dresume=false'
                }
           }
           
@@ -62,7 +62,7 @@ sh 'docker push likeaboos/ci:latest '
 stage('Docker Compose') {
       steps {
 	      sh 'printenv'
-      //         sh 'docker-compose up --d --force-recreate '
+               sh 'docker-compose up --d --force-recreate '
        }
      }
 
