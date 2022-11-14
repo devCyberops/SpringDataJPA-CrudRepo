@@ -84,7 +84,7 @@ public class ProduitServiceImplTest {
 	     Mockito.when(produitRepositoryMock.save(op)).thenReturn(op);
 	     Produit op1 = produitService.updateProduit(op);
 	     Assertions.assertEquals(op.getLibelleProduit(),op1.getLibelleProduit());
-			System.out.println("woorkiiiiing update !");
+			System.out.println("workiiiiing update !");
 
 	}
 
