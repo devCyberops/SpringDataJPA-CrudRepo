@@ -83,3 +83,4 @@ public class CategorieProduitServiceImplMock {
 		CategorieProduit cp1 = categorieProduitService.retrieveCategorieProduit((long)1);
 		Assertions.assertNotNull(cp1);
 	}
+	*/
