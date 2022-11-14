@@ -56,6 +56,11 @@ pipeline{
 
             }
         }
+	    stage("Email"){
+           steps{
+               emailext attachLog: true, body: "SUCCESS PUBLISH :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
+           }
+       } 
 
 stage('Build Docker Image') {
                       steps {
