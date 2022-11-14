@@ -32,22 +32,14 @@ pipeline{
      
         }
     }
-     stage('Maven Install') {
+     /*stage('Maven Install') {
         steps('Install') { 
         
           sh 'mvn install'
      
         }  
-    }
+    }*/
     
-    stage('SonarQube') { 
-        
-        steps{
-            
-            sh 'mvn sonar:sonar -Dsonar.login=79a65f38eb97721b534c3360dc83e0f3bf042f63'
-        }
-    
-    }
         
     stage ('Junit + Mockito') {
         
@@ -58,12 +50,21 @@ pipeline{
         
     } 
     
+    /*stage('SonarQube') { 
+        
+        steps{
+            
+            sh 'mvn sonar:sonar -Dsonar.login=bca9996621cff432c68644699c1e52765c050f99'
+        }
+    
+    }*/
+    
      /*stage("nexus deploy"){
         
         steps{
             
             sh 'mvn clean deploy -DskipTests'
-            sh'mvn clean deploy -Dmaven.test.skip=true -Dresume=false'
+            
              
             }
     }*/
@@ -73,11 +74,10 @@ pipeline{
     	
         steps {
             
-      	sh 'docker build -t '
+      	sh 'docker build -t test:1 .'
       	
-      	 withDockerRegistry([credentialsId: "Docker-Hub-milqshake", url: ""]) {
-            sh 'docker push'
-        }
+            sh 'docker push test:1'
+        
       }
     }
     
@@ -100,3 +100,4 @@ pipeline{
 
 }
 }
+
