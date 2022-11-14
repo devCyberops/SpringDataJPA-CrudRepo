@@ -97,7 +97,17 @@ stage('Build Docker Image') {
                             }*/
 
 	    
+post {
 
+        always {
+            echo 'This will always run'
+        }
+       
+        success {
+            mail to: "insaf.elinkichari@esprit.tn",
+                     subject: "Success",
+                     body: "Succes on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER} "        
+        }
 
 
      
