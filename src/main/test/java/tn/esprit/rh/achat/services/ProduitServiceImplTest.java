@@ -69,7 +69,7 @@ public class ProduitServiceImplTest {
 
 	@Test
 	public void testdeleteProduit() {
-		Produit op2 = Produit.builder().codeProduit("999").libelleProduit("Selma").prix(900f).build();
+		Produit op2 = Produit.builder().codeProduit("999").libelleProduit("top").prix(900f).build();
 	     produitService.deleteProduit(op2.getIdProduit());
 	     Mockito.verify(produitRepositoryMock).deleteById(op2.getIdProduit());
 			System.out.println("woooorkiiiiing delete !");
