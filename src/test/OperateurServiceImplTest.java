@@ -44,6 +44,31 @@ class OperateurServiceImplTest {
 
     }
 
+    @Test
+    void testretrieveAllOperateurs() {
+        Mockito.when(operateurRepositoryMock.findAll()).thenReturn(listOperateurs);
+        List<Operateur> listOp = operateurService.retrieveAllOperateurs();
+        Assertions.assertNotNull(listOp);
+    }
+
+
+
+    @Test
+    void tesupdateOperateur() {
+        op.setPrenom("faten");
+        Mockito.when(operateurRepositoryMock.save(op)).thenReturn(op);
+        Operateur op1 = operateurService.updateOperateur(op);
+        Assertions.assertEquals(op.getPrenom(),op1.getPrenom());
+
+    }
+
+    @Test
+    void testdeleteOperateur() {
+        Operateur op2 = Operateur.builder().nom("test").prenom("aaa").password("root").build();
+        operateurService.deleteOperateur(op2.getIdOperateur());
+        Mockito.verify(operateurRepositoryMock).deleteById(op2.getIdOperateur());
+
+    }
 
 
 
