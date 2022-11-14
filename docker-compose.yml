@@ -14,11 +14,11 @@ services:
     volumes:
       - /home/mysql/data
     networks:
-      - backend
+      - db-network
       
       
  # App backend service creation
-  spring-boot:
+  backend:
     depends_on:
       - database
     container_name: spring_container
@@ -38,8 +38,19 @@ services:
     stdin_open: true
     tty: true
     networks:
-      - backend
+      - backend-network
     restart: on-failure
   
 networks:
   backend:
+  
+#App frontend service creation  
+   front:
+    build:
+      context: .
+    container_name: ci-angular
+    image: likeaboos/angular-ci:frontend
+    ports:
+      - "8888:80"
+    networks:
+      - front-network
