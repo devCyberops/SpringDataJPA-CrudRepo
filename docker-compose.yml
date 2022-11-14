@@ -1,4 +1,4 @@
-  version: "3.8"
+  version: "3.3"
 services:
 
   mysql-db:
@@ -27,7 +27,7 @@ services:
   springboot-be:
     depends_on:
       - mysql-db
-    image: nourmohsni/devopsproject:latest
+    image: arijebhs/devopsproject:latest
     container_name: springboot-be
     env_file: ./.env
     environment:
