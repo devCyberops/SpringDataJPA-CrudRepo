@@ -1,67 +1,89 @@
-package tn.esprit.rh.achat.services;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-
 import lombok.extern.slf4j.Slf4j;
-import tn.esprit.rh.achat.entities.CategorieProduit;
-import tn.esprit.rh.achat.services.ICategorieProduitService;
+import tn.esprit.rh.achat.AchatApplication;
+import tn.esprit.rh.achat.entities.Produit;
+import tn.esprit.rh.achat.repositories.ProduitRepository;
+import tn.esprit.rh.achat.services.ProduitServiceImpl;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
-@Slf4j
-public class CartegorieServiceImplTest {
-	@Autowired
-	ICategorieProduitService categorieProduitService;
-	
+@SpringBootTest(classes = AchatApplication.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@ExtendWith(MockitoExtension.class)
+public class ProduitServiceImplTest {
+	 @Mock
+	 ProduitRepository produitRepositoryMock;
+	 @InjectMocks
+	 ProduitServiceImpl produitService;
+	 
+	 
+	 Produit op = Produit.builder().codeProduit("999").libelleProduit("top").prix(900f).build();
+	 List<Produit> listOperateurs = new ArrayList<Produit>(){
+	     {
+	         add(Produit.builder().codeProduit("888").libelleProduit("Arije").prix(800f).build());
+	         add(Produit.builder().codeProduit("666").libelleProduit("insaf").prix(600f).build());
+	         add(Produit.builder().codeProduit("522").libelleProduit("amir").prix(500f).build());
+	         add(Produit.builder().codeProduit("1000").libelleProduit("toure").prix(1000f).build());
+
+	     }
+
+	 };
+	 
 	@Test
-	public void testAddCategorie() throws ParseException {
-		CategorieProduit cat = new CategorieProduit();
-		cat.setCodeCategorie("CAT2");
-		cat.setLibelleCategorie("categorie 2");
-		categorieProduitService.addCategorieProduit(cat);
-		log.info("categorie ajouter avec success");
+	public void testretrieveAllProduits() {
+		 Mockito.when(produitRepositoryMock.findAll()).thenReturn(listOperateurs);
+	     List<Produit> listOp = produitService.retrieveAllProduits();
+	     Assertions.assertNotNull(listOp);
+			System.out.println("woooorkiiiiing all retrieve !");
+
+
 	}
-	
+
 	@Test
-	public void testModifierCategorie() throws ParseException {
-		CategorieProduit cat = new CategorieProduit();
-		cat.setCodeCategorie("CAT2");
-		cat.setLibelleCategorie("categorie 2");
-		categorieProduitService.addCategorieProduit(cat);
-		log.info("categorie ajouter avec success");
-		cat.setCodeCategorie("CAT5");
-		cat.setLibelleCategorie("categorie 5");
-		categorieProduitService.updateCategorieProduit(cat);
-		log.info("categorie modifier avec success");
+	public void testretrieveProduit() {
+		Mockito.when(produitRepositoryMock.findById(Mockito.anyLong())).thenReturn(Optional.of(op)); //find all
+	    Produit op1 = produitService.retrieveProduit(2L);
+	    Assertions.assertNotNull(op1);
+		System.out.println("wokiiiiing retrieve !");
 	}
-	
+
 	@Test
-	public void testDeleteCategorie() throws ParseException {
-		CategorieProduit cat = new CategorieProduit();
-		cat.setCodeCategorie("CAT2");
-		cat.setLibelleCategorie("categorie");
-		categorieProduitService.addCategorieProduit(cat);
-		categorieProduitService.deleteCategorieProduit(cat.getIdCategorieProduit());
-		log.info("categorie supprimer avec success");
+	public void testaddProduit() {
+		 Mockito.when(produitRepositoryMock.save(op)).thenReturn(op);
+		 Produit op1 = produitService.addProduit(op);
+	     Assertions.assertNotNull(op1);
+			System.out.println("wooorkiiiiing add !");
+
 	}
-	
+
 	@Test
-	public void testRetrieveAllCategorie() throws ParseException {
-		List<CategorieProduit> listCategorie = categorieProduitService.retrieveAllCategorieProduits();
-		log.info("Nombre categorie: " + listCategorie.size()+" \n");
-		for(int i=0;i<listCategorie.size();i++){
-			log.info(""+listCategorie.get(i).getLibelleCategorie());
-		}
+	public void testdeleteProduit() {
+		Produit op2 = Produit.builder().codeProduit("999").libelleProduit("Selma").prix(900f).build();
+	     produitService.deleteProduit(op2.getIdProduit());
+	     Mockito.verify(produitRepositoryMock).deleteById(op2.getIdProduit());
+			System.out.println("woooorkiiiiing delete !");
+
 	}
-	
+
+	@Test
+	public void testupdateProduit() {
+		op.setLibelleProduit("zied");
+	     Mockito.when(produitRepositoryMock.save(op)).thenReturn(op);
+	     Produit op1 = produitService.updateProduit(op);
+	     Assertions.assertEquals(op.getLibelleProduit(),op1.getLibelleProduit());
+			System.out.println("woooorkiiiiing update !");
+
+	}
+
 }
