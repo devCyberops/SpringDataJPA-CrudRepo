@@ -3,12 +3,7 @@ pipeline{
     tools {
         maven 'M2_HOME'
     }
-
-
     stages {
-
-
-
         stage('Getting project from Git') {
             steps{
       			checkout([$class: 'GitSCM', branches: [[name: '*/insaf']],
