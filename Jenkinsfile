@@ -44,7 +44,7 @@ pipeline{
         
         steps{
             
-            sh 'mvn sonar:sonar -Dsonar.login=93119ee3376d747389d2d527d09567cade5a3c44"'
+            sh 'mvn sonar:sonar -Dsonar.login=79a65f38eb97721b534c3360dc83e0f3bf042f63'
         }
     
     }
@@ -74,6 +74,10 @@ pipeline{
         steps {
             
       	sh 'docker build -t '
+      	
+      	 withDockerRegistry([credentialsId: "Docker-Hub-milqshake", url: ""]) {
+            sh 'docker push'
+        }
       }
     }
     
@@ -82,7 +86,8 @@ pipeline{
         steps {
             
         sh "docker-compose up -d"
-      
+       
+        
         }
     }
 
@@ -95,5 +100,3 @@ pipeline{
 
 }
 }
-
-    
