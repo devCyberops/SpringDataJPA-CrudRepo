@@ -56,9 +56,10 @@ pipeline{
 
             }
         }
-	    stage("Email"){
+   
+     stage("Email"){
            steps{
-               emailext attachLog: true, body: "SUCCESS PUBLISH :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
+               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'insaf.elinkichari@esprit.tn'
            }
        } 
 
