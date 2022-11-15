@@ -76,7 +76,14 @@ stage('Build Docker Image') {
 		  }
 	    
 	 
-	    
+	        stage('Push Docker Image') {
+                   steps {
+                     withCredentials([string(credentialsId: 'docker-hub', variable: 'docker-hub')]) {
+                     sh "docker login -u insaf921999 -p Djerb@tunis1"
+                     }
+                     sh "docker push insaf921999/alpine:1.0.0"
+                   }
+              }
 	             /*         stage('Push Docker Image') {
                                         steps {
                                    sh 'docker push insaf921999/alpine:latest '
