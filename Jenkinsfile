@@ -42,7 +42,6 @@ pipeline{
             steps{
 
              		sh "mvn sonar:sonar -Dsonar.projectKey=achat -Dsonar.host.url=http://192.168.1.3:9000 -Dsonar.login=4a6c5ee5dfe730fe7a38cb3c96f13f4811aa1fe1"
-
             }
         }
 
