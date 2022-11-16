@@ -56,8 +56,8 @@ environment {
        steps {
         withDockerRegistry([credentialsId: "Docker-Hub-AmirTrigui", url: ""]) {
            sh 'printenv'
-         //  sh 'docker build -t likeaboos/ci:latest .'
-//sh 'docker push likeaboos/ci:latest '
+           sh 'docker build -t likeaboos/ci:latest .'
+sh 'docker push likeaboos/ci:latest '
          }
        }
      }
@@ -74,7 +74,7 @@ environment {
 stage('Docker Compose') {
       steps {
 	      sh 'printenv'
-              // sh 'docker-compose up --d --force-recreate '
+               sh 'docker-compose up --d --force-recreate '
        }
      }
 
