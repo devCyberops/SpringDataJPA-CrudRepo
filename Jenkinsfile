@@ -63,7 +63,7 @@ sh 'docker push likeaboos/ci:latest '
 stage('Docker Compose') {
       steps {
 	      sh 'printenv'
-               sh 'docker-compose up --d --force-recreate '
+              // sh 'docker-compose up --d --force-recreate '
        }
      }
 
