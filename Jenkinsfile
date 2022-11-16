@@ -56,8 +56,8 @@ environment {
        steps {
         withDockerRegistry([credentialsId: "Docker-Hub-AmirTrigui", url: ""]) {
            sh 'printenv'
-           sh 'docker build -t likeaboos/ci:latest .'
-sh 'docker push likeaboos/ci:latest '
+   //        sh 'docker build -t likeaboos/ci:latest .'
+//sh 'docker push likeaboos/ci:latest '
          }
        }
      }
@@ -65,7 +65,7 @@ sh 'docker push likeaboos/ci:latest '
 	    stage('Trivy Scan') {
             steps {
                 script {
-			sh ' trivy likeaboos/ci:latest'
+			sh ' trivy likeaboos/ci'
                 }
                 
             }
