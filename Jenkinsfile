@@ -86,23 +86,7 @@ stage('Docker Compose') {
 }  
 	post {
 
-        always {
-            echo 'This will always run'
-        }
        
-        success {
-            mail to: "mohamedamir.trigui@esprit.tn",
-                     subject: "Success",
-                     body: "Succes on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER} "        
-        }
-        
-        failure {
-                    mail to: "mohamedamir.trigui@esprit.tn",
-                     subject: "Failure",
-                     body: "Failure on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL} "     
-                }
-
-    }
 	
 	
         always {
@@ -116,7 +100,7 @@ stage('Docker Compose') {
                 reportFiles: 'trivy_report.html',
                 reportName: 'Trivy Scan',
                 ])
-            }
+            }}
         
 	
 	
