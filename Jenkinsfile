@@ -104,7 +104,7 @@ stage('Docker Compose') {
 
     }
 	
-	post {
+	
         always {
             archiveArtifacts artifacts: "trivy_report.html", fingerprint: true
                 
@@ -117,7 +117,7 @@ stage('Docker Compose') {
                 reportName: 'Trivy Scan',
                 ])
             }
-        }
+        
 	
 	
 }
