@@ -65,7 +65,9 @@ environment {
 	    stage('Trivy Scan') {
             steps {
                 script {
-			sh ' trivy image --security-checks vuln likeaboos/ci'
+			
+			sh "trivy image -f json -o results.json likeaboos/ci"
+                recordIssues(tools: [trivy(pattern: 'results.json')])
                 }
                 
             }
