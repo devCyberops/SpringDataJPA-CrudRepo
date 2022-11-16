@@ -64,6 +64,7 @@ pipeline{
 
                   stage('login dockerhub') {
                                         steps {
+				      sh 'printenv'
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
                                             }
 		  }
