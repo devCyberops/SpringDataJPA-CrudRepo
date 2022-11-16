@@ -64,7 +64,7 @@ pipeline{
 
                   stage('login dockerhub') {
                                         steps {
-				      sh 'printenv'
+				     // sh 'printenv'
                                       sh 'docker login -u insaf921999 -p Djerb@tunis1'
                                             }
 		  }
@@ -72,16 +72,16 @@ pipeline{
 	 stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'sudo docker build -t insaf921999/achat:latest .'
+                            sh 'docker build -t insaf921999/achat:latest .'
                           }
                       }
                   }
 	    
 	        stage('Push Docker Image') {
                    steps {
-                     withCredentials([string(credentialsId: 'docker-hub', variable: 'docker-hub')]) {
-                     sh "docker login -u insaf921999 -p Djerb@tunis1"
-                     }
+                //     withCredentials([string(credentialsId: 'docker-hub', variable: 'docker-hub')]) {
+               //      sh "docker login -u insaf921999 -p Djerb@tunis1"
+                   //  }
                      sh "docker push insaf921999/alpine:1.0.0"
                    }
               }
