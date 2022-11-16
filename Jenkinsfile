@@ -60,13 +60,7 @@ pipeline{
    
 
 
-stage('Build Docker Image') {
-                      steps {
-                          script {
-                            sh 'sudo docker build -t insaf921999/achat:latest .'
-                          }
-                      }
-                  }
+
 
                   stage('login dockerhub') {
                                         steps {
@@ -74,7 +68,14 @@ stage('Build Docker Image') {
                                             }
 		  }
 	    
-	 
+	 stage('Build Docker Image') {
+                      steps {
+                          script {
+                            sh 'sudo docker build -t insaf921999/achat:latest .'
+                          }
+                      }
+                  }
+	    
 	        stage('Push Docker Image') {
                    steps {
                      withCredentials([string(credentialsId: 'docker-hub', variable: 'docker-hub')]) {
