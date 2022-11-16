@@ -41,7 +41,7 @@ pipeline{
         stage('Code Quality Check via SonarQube') {
             steps{
 
-             		sh "mvn sonar:sonar -Dsonar.projectKey=achat -Dsonar.host.url=http://192.168.1.3:9000 -Dsonar.login=4a6c5ee5dfe730fe7a38cb3c96f13f4811aa1fe1"
+             		sh "mvn sonar:sonar -Dsonar.projectKey=achat -Dsonar.host.url=http://192.168.1.5:9000 -Dsonar.login=4a6c5ee5dfe730fe7a38cb3c96f13f4811aa1fe1"
             }
         }
 
@@ -52,7 +52,7 @@ pipeline{
             steps {
 
 
-  sh 'mvn clean package deploy:deploy-file -DgroupId=com.esprit.rh -DartifactId=achat -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.1.3:8081/repository/maven-releases/ -Dfile=target/achat-1.0.jar'
+  sh 'mvn clean package deploy:deploy-file -DgroupId=com.esprit.rh -DartifactId=achat -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.1.5:8081/repository/maven-releases/ -Dfile=target/achat-1.0.jar'
 
 
             }
