@@ -85,23 +85,25 @@ stage('Docker Compose') {
 	
   
 }  
-	post {
+post {
 
-       
-	
-	
         always {
-            archiveArtifacts artifacts: "trivy_report.html", fingerprint: true
-                
-            publishHTML (target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'trivy_report.html',
-                reportName: 'Trivy Scan',
-                ])
-            }}
+            echo 'This will always run'
+        }
+       
+        success {
+            mail to: "mohamedamir.trigui@esprit.tn",
+                     subject: "Success",
+                     body: "Succes on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER} "        
+        }
+        
+        failure {
+                    mail to: "mohamedamir.trigui@esprit.tn",
+                     subject: "Failure",
+                     body: "Failure on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL} "     
+                }
+
+    }	
         
 	
 	
