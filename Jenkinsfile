@@ -65,7 +65,7 @@ environment {
 	    stage('Trivy Scan') {
             steps {
                 script {
-			sh ' trivy image likeaboos/ci'
+			sh ' trivy image --security-checks vuln likeaboos/ci'
                 }
                 
             }
