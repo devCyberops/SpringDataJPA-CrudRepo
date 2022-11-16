@@ -49,19 +49,7 @@ environment {
           }
 
 	    
-	     stage('Vulnerability Scan - Docker') {
-        steps {
-          parallel(
- 			"Trivy Scan":{
- 	 			sh "bash trivy-docker-image-scan.sh"
- 	 		  },
- 		 "OPA Conftest":{
- 				sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile'
- 			}
-
-        	)
-        }
-      }
+	  
 	    
 	    
     stage('Docker Build and Push') {
@@ -74,6 +62,15 @@ sh 'docker push likeaboos/ci:latest '
        }
      }
 
+	    stage('Trivy Scan') {
+            steps {
+                script {
+                    sh """trivy image --format template --template \"@/home/vijeta1/contrib/html.tpl\" --output trivy_report.html XXXXXXX.dkr.ecr.ap-south-1.amazonaws.com/${params.SERVICE}:${BUILD_NUMBER} """
+                    
+                }
+                
+            }
+        }
 
 stage('Docker Compose') {
       steps {
