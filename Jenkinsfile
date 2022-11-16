@@ -63,7 +63,7 @@ pipeline{
 stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'docker build -t insaf921999/achat:latest .'
+                            sh 'sudo docker build -t insaf921999/achat:latest .'
                           }
                       }
                   }
