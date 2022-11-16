@@ -65,7 +65,7 @@ environment {
 	    stage('Trivy Scan') {
             steps {
                 script {
-			sh ' trivy likeaboos/ci'
+			sh ' trivy image likeaboos/ci'
                 }
                 
             }
