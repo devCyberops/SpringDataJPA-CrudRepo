@@ -74,7 +74,7 @@ pipeline{
         }
 
     
-    /*stage ('SonarQube') { 
+    stage ('SonarQube') { 
         
         steps{
                 sh 'mvn sonar:sonar \
@@ -89,7 +89,7 @@ pipeline{
  		    
         
     
-    }*/	
+    }
     
      /*stage("nexus deploy"){
         
@@ -106,6 +106,19 @@ pipeline{
                sh 'docker build -t milqshake/tpachat .'
 }
             } 
+     
+     
+      stage('Trivy Scan') {
+            steps {
+                script {
+			
+			sh "trivy image -f json -o results.json milqshake/tpachat"
+                recordIssues(tools: [trivy(pattern: 'results.json')])
+                }
+                
+            }
+        }
+
         
            stage('login to dockerhub') {
             steps{
