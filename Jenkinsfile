@@ -3,7 +3,13 @@ pipeline{
     agent any
     
      tools {
-    maven 'M2_HOME'
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven 'M2_HOME'
+        jdk 'JAVA_HOME'
+    }
+    
+      environment { 
+       DOCKERHUB_CREDENTIALS = credentials('docker-hub')
     }
     
  stages{
@@ -12,7 +18,16 @@ pipeline{
         
         steps('Cloning'){
             
-        git branch: 'zied', url: 'https://github.com/devCyberops/SpringDataJPA-CrudRepo'
+        git branch : 'zied',
+                // Get some code from a GitHub repository
+                url: 'https://github.com/devCyberops/SpringDataJPA-CrudRepo.git'
+
+                // Get System Current Date
+                script{
+                    Date date = new Date()
+                    String dateString = date.format("dd-MM-yyyy")
+                    println "Date : " + dateString
+                }
         }
     }
         
@@ -40,7 +55,7 @@ pipeline{
         }  
     }*/
     
-        
+       
     stage ('Junit + Mockito') {
         
         steps{
@@ -50,14 +65,31 @@ pipeline{
         
     } 
     
-    /*stage('SonarQube') { 
+    stage("Maven Build") {
+            steps {
+                script {
+                    sh 'mvn package -DskipTests=true'
+                }
+            }
+        }
+
+    
+    /*stage ('SonarQube') { 
         
         steps{
-            
-            sh 'mvn sonar:sonar -Dsonar.login=bca9996621cff432c68644699c1e52765c050f99'
-        }
+                sh 'mvn sonar:sonar \
+  -Dsonar.projectKey=com.esprit.examen:tpAchatProject \
+  -Dsonar.host.url=http://192.168.1.17:9000 \
+  -Dsonar.login=77c549ecbe09411c0d284e027174bdf2f607348b'      
+                            
+                      
+                    
+            }
+        
+ 		    
+        
     
-    }*/
+    }*/	
     
      /*stage("nexus deploy"){
         
@@ -69,17 +101,26 @@ pipeline{
             }
     }*/
      
-    stage('Docker Build') {
-    	agent any
-    	
-        steps {
-            
-      	sh 'docker build -t test:1 .'
-      	
-            sh 'docker push test:1'
+   stage('Building Docker image') { 
+            steps { 
+               sh 'docker build -t milqshake/tpachat .'
+}
+            } 
         
-      }
-    }
+           stage('login to dockerhub') {
+            steps{
+               
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p Docker2022'
+            }
+           }
+           
+        stage('Push Docker image') { 
+            steps { 
+                sh 'docker push milqshake/tpachat:latest'
+}
+
+            
+        } 
     
     stage('Docker-compose up') {
         
@@ -99,5 +140,21 @@ pipeline{
 
 
 }
+
+post {
+            success {
+                mail body: "success on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL}",
+                to: "zied.selmi@esprit.tn",
+                subject: "Pipeline Success"  
+            }
+            failure {
+                mail body: "Job has failed${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL}", 
+                to: "zied.selmi@esprit.tn",
+                subject: 'Pipeline fail'
+            }
+    }
+
 }
+
+
 
