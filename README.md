@@ -1,5 +1,5 @@
 # SpringDataJPA-CrudRepo
-• Introduction DevOps (installation Virtual Box / Vagrant / CentOS)
+Outils utilsés:(installation Virtual Box / Vagrant / CentOS)
 • Jenkins (Serveur d’intégration continue)
 • Git (Projet Spring Boot et Angular)
 • Nexus (Gestion des livrables)
