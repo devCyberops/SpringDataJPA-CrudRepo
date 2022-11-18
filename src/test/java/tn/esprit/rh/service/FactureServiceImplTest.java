@@ -1,3 +1,5 @@
+/*
+
 package tn.esprit.rh.achat.services;
 import tn.esprit.rh.achat.entities.Facture;
 import tn.esprit.rh.achat.entities.Operateur;
@@ -62,7 +64,7 @@ public class FactureServiceImplTest {
         Facture facture = factureService.retrieveFacture(1l);
         assertNotNull(facture.getIdFacture());
     }
-    /*
+    
     @Test
     public void testgetFacturesByFournisseur() throws ParseException {
         Set<Facture> factures =  factureService.getFacturesByFournisseur(2l);
@@ -72,7 +74,7 @@ public class FactureServiceImplTest {
             assertNotNull(facture.getIdFacture());
         }
     }
-     */
+     
     @Test
     public void testCancelFacture() throws ParseException  {
         Facture sa = new Facture();
@@ -88,3 +90,4 @@ public class FactureServiceImplTest {
         assertNotNull(sa.getIdFacture());
     }
 }
+ */
